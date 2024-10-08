@@ -1,0 +1,814 @@
+{
+  "last_node_id": 39,
+  "last_link_id": 82,
+  "nodes": [
+    {
+      "id": 22,
+      "type": "Note",
+      "pos": {
+        "0": 40,
+        "1": 680
+      },
+      "size": {
+        "0": 500,
+        "1": 470
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Instructions",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Simplest way to run:\n\n1. Load desired image in the \"Load Image\" node and mask the area you want to replace.\n\n2. Select a checkpoint for inpainting in the \"Load Checkpoint\" node.\n\n3. Write the positive and negative prompts in the green and red boxes. These prompts do not have to match the whole image, but only the masked area.\n\n4. Adjust denoise (e.g. 1 to fully replace the content, ~0.8 to keep part of it, 0.1 to match around.\n\n5. Run!\n\n\n\nHow to increase the context area for the model to know better what to draw:\n- Option 1: Increase context_expand_factor, e.g. set it to 2.\n- Option 2: Increase context_expand_pixels, e.g. set it to 100.\n- Option 3: Duplicate the load image node and connect its mask to \"optional_context_mask\" in the \"Inpaint Crop node\". Mask the area that is relevant for context (no need to fill it, only the corners of the masked area matter.\n\n\n\nThe default parameters for Inpaint Crop and Inpaint Stitch work well for most inpainting tasks.\n\nFor SDXL, try the \"forced size\" mode which forces 1024x1024."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 25,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1943,
+        "1": -145
+      },
+      "size": {
+        "0": 738.9384765625,
+        "1": 477.9058532714844
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI-crop-inpaint"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": {
+        "0": 89,
+        "1": 109
+      },
+      "size": {
+        "0": 400,
+        "1": 500
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            50
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            2
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": 1943,
+        "1": 377
+      },
+      "size": {
+        "0": 750.0426635742188,
+        "1": 633.2598876953125
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 82,
+          "dir": 3
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 50,
+          "dir": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_spxez_00063_.png&type=temp&subfolder=&rand=0.032002356814355815"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_spxez_00064_.png&type=temp&subfolder=&rand=0.010285559802101663"
+          }
+        ]
+      ]
+    },
+    {
+      "id": 19,
+      "type": "InpaintModelConditioning",
+      "pos": {
+        "0": 1130,
+        "1": 340
+      },
+      "size": {
+        "0": 216.59999084472656,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 37
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 38
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 44
+        },
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 42
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 43
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            69
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            70
+          ],
+          "slot_index": 1,
+          "shape": 3
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            71
+          ],
+          "slot_index": 2,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InpaintModelConditioning"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 10,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": 590,
+        "1": 680
+      },
+      "size": {
+        "0": 370,
+        "1": 100
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            72
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            21,
+            24
+          ],
+          "slot_index": 1,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            44,
+            73
+          ],
+          "slot_index": 2,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "512-inpainting-ema.safetensors"
+      ]
+    },
+    {
+      "id": 37,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1430,
+        "1": 70
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 75,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 76,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            74
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 1,
+      "type": "InpaintCrop",
+      "pos": {
+        "0": 570,
+        "1": 110
+      },
+      "size": {
+        "0": 320,
+        "1": 386
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 2
+        },
+        {
+          "name": "optional_context_mask",
+          "type": "MASK",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stitch",
+          "type": "STITCH",
+          "links": [
+            78
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "cropped_image",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 1,
+          "shape": 3
+        },
+        {
+          "name": "cropped_mask",
+          "type": "MASK",
+          "links": [
+            43
+          ],
+          "slot_index": 2,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InpaintCrop"
+      },
+      "widgets_values": [
+        20,
+        1,
+        true,
+        16,
+        false,
+        16,
+        "bicubic",
+        "ranged size",
+        1024,
+        1024,
+        1,
+        512,
+        512,
+        768,
+        768,
+        32
+      ]
+    },
+    {
+      "id": 12,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1130,
+        "1": 770
+      },
+      "size": {
+        "0": 302.3999938964844,
+        "1": 120
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 24,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            38
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "CLIP Text Encode (Prompt) - Negative",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "ugly, text, watermark"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 35,
+      "type": "KSampler (Efficient)",
+      "pos": {
+        "0": 1483,
+        "1": 343
+      },
+      "size": [
+        325,
+        562
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 72
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 69
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 70
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 71
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": 73,
+          "shape": 7
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            75
+          ],
+          "slot_index": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            76
+          ],
+          "slot_index": 4
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler (Efficient)"
+      },
+      "widgets_values": [
+        -1,
+        null,
+        20,
+        13,
+        "dpmpp_3m_sde",
+        "karras",
+        1,
+        "auto",
+        "true"
+      ],
+      "color": "#443322",
+      "bgcolor": "#665533",
+      "shape": 1
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1130,
+        "1": 560
+      },
+      "size": {
+        "0": 310,
+        "1": 140
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "CLIP Text Encode (Prompt) - Positive",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 36,
+      "type": "InpaintStitch",
+      "pos": {
+        "0": 1680,
+        "1": 70
+      },
+      "size": {
+        "0": 210,
+        "1": 78
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "stitch",
+          "type": "STITCH",
+          "link": 78
+        },
+        {
+          "name": "inpainted_image",
+          "type": "IMAGE",
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            82
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InpaintStitch"
+      },
+      "widgets_values": [
+        "bislerp"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      3,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      3,
+      1,
+      1,
+      1,
+      "MASK"
+    ],
+    [
+      21,
+      10,
+      1,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      24,
+      10,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      37,
+      11,
+      0,
+      19,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      38,
+      12,
+      0,
+      19,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      1,
+      1,
+      19,
+      3,
+      "IMAGE"
+    ],
+    [
+      43,
+      1,
+      2,
+      19,
+      4,
+      "MASK"
+    ],
+    [
+      44,
+      10,
+      2,
+      19,
+      2,
+      "VAE"
+    ],
+    [
+      50,
+      3,
+      0,
+      26,
+      1,
+      "IMAGE"
+    ],
+    [
+      69,
+      19,
+      0,
+      35,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      70,
+      19,
+      1,
+      35,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      71,
+      19,
+      2,
+      35,
+      3,
+      "LATENT"
+    ],
+    [
+      72,
+      10,
+      0,
+      35,
+      0,
+      "MODEL"
+    ],
+    [
+      73,
+      10,
+      2,
+      35,
+      4,
+      "VAE"
+    ],
+    [
+      74,
+      37,
+      0,
+      36,
+      1,
+      "IMAGE"
+    ],
+    [
+      75,
+      35,
+      3,
+      37,
+      0,
+      "LATENT"
+    ],
+    [
+      76,
+      35,
+      4,
+      37,
+      1,
+      "VAE"
+    ],
+    [
+      78,
+      1,
+      0,
+      36,
+      0,
+      "STITCH"
+    ],
+    [
+      82,
+      36,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6934334949441574,
+      "offset": [
+        -632.327473116149,
+        219.30027547953375
+      ]
+    }
+  },
+  "version": 0.4
+}
