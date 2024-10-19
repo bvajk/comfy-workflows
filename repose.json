@@ -1,0 +1,910 @@
+{
+  "last_node_id": 93,
+  "last_link_id": 178,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "PulidEvaClipLoader",
+      "pos": {
+        "0": 1441.4102783203125,
+        "1": -624.4485473632812
+      },
+      "size": {
+        "0": 264.5999755859375,
+        "1": 26
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "EVA_CLIP",
+          "type": "EVA_CLIP",
+          "links": [
+            104
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "EVA_CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidEvaClipLoader"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 66,
+      "type": "ApplyPulidAdvanced",
+      "pos": {
+        "0": 1821.41015625,
+        "1": -594.4485473632812
+      },
+      "size": {
+        "0": 315,
+        "1": 278
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null,
+          "label": "model"
+        },
+        {
+          "name": "pulid",
+          "type": "PULID",
+          "link": 103,
+          "label": "pulid"
+        },
+        {
+          "name": "eva_clip",
+          "type": "EVA_CLIP",
+          "link": 104,
+          "label": "eva_clip"
+        },
+        {
+          "name": "face_analysis",
+          "type": "FACEANALYSIS",
+          "link": 105,
+          "label": "face_analysis"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 146,
+          "label": "image"
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null,
+          "label": "attn_mask",
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            142
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyPulidAdvanced"
+      },
+      "widgets_values": [
+        0.8,
+        "ortho_v2",
+        2,
+        0.7000000000000001,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 80,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 1917,
+        "1": 356
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            145
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Anything Everywhere3",
+      "pos": {
+        "0": 1633,
+        "1": 386
+      },
+      "size": {
+        "0": 252,
+        "1": 66
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "MODEL",
+          "type": "*",
+          "link": 1,
+          "label": "MODEL",
+          "color_on": "#B39DDB",
+          "shape": 7
+        },
+        {
+          "name": "CLIP",
+          "type": "*",
+          "link": 2,
+          "label": "CLIP",
+          "color_on": "#FFD500",
+          "shape": 7
+        },
+        {
+          "name": "VAE",
+          "type": "*",
+          "link": 3,
+          "label": "VAE",
+          "color_on": "#FF6E6E",
+          "shape": 7
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Anything Everywhere3",
+        "group_restricted": 0,
+        "color_restricted": 0
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "PulidModelLoader",
+      "pos": {
+        "0": 1338.4111328125,
+        "1": -760.4478759765625
+      },
+      "size": {
+        "0": 368.7454833984375,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "PULID",
+          "type": "PULID",
+          "links": [
+            103
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "PULID"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidModelLoader"
+      },
+      "widgets_values": [
+        "ip-adapter_pulid_sdxl_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "PulidInsightFaceLoader",
+      "pos": {
+        "0": 1391.410888671875,
+        "1": -504.44866943359375
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FACEANALYSIS",
+          "type": "FACEANALYSIS",
+          "links": [
+            105
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "FACEANALYSIS"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidInsightFaceLoader"
+      },
+      "widgets_values": [
+        "ROCM"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 2628,
+        "1": 45
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            178
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 93,
+      "type": "SaveImage",
+      "pos": {
+        "0": 2865,
+        "1": 51
+      },
+      "size": {
+        "0": 419.0940246582031,
+        "1": 422.6411437988281
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 178
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "respose-%KSampler.seed%"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1627,
+        "1": 76
+      },
+      "size": {
+        "0": 278.9639587402344,
+        "1": 113.01194763183594
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            177
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "a naked lady"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": {
+        "0": 2258,
+        "1": 46
+      },
+      "size": {
+        "0": 320,
+        "1": 262
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 142,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 177,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 176,
+          "label": "negative"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 145,
+          "label": "latent_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        903335027271210,
+        "randomize",
+        5,
+        1,
+        "dpmpp_sde",
+        "karras",
+        1
+      ]
+    },
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": 1173,
+        "1": 386
+      },
+      "size": {
+        "0": 410.0034484863281,
+        "1": 98
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "juggernautXL_v9Rdphoto2Lightning.safetensors"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "LoadImage",
+      "pos": {
+        "0": 1394,
+        "1": -378
+      },
+      "size": {
+        "0": 320,
+        "1": 314
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            146
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "slot_index": 1,
+          "shape": 3,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "Névtelen másolata.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1630,
+        "1": 247
+      },
+      "size": {
+        "0": 269.3857727050781,
+        "1": 76
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            176
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text,watermark\n"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      1,
+      1,
+      2,
+      1,
+      "CLIP"
+    ],
+    [
+      3,
+      1,
+      2,
+      2,
+      2,
+      "VAE"
+    ],
+    [
+      18,
+      5,
+      0,
+      21,
+      0,
+      "LATENT"
+    ],
+    [
+      103,
+      14,
+      0,
+      66,
+      1,
+      "PULID"
+    ],
+    [
+      104,
+      15,
+      0,
+      66,
+      2,
+      "EVA_CLIP"
+    ],
+    [
+      105,
+      16,
+      0,
+      66,
+      3,
+      "FACEANALYSIS"
+    ],
+    [
+      130,
+      1,
+      2,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      131,
+      11,
+      0,
+      27,
+      4,
+      "INT"
+    ],
+    [
+      132,
+      1,
+      1,
+      6,
+      1,
+      "CLIP"
+    ],
+    [
+      133,
+      1,
+      2,
+      6,
+      2,
+      "VAE"
+    ],
+    [
+      134,
+      1,
+      0,
+      66,
+      0,
+      "MODEL"
+    ],
+    [
+      135,
+      1,
+      2,
+      55,
+      1,
+      "VAE"
+    ],
+    [
+      136,
+      1,
+      2,
+      29,
+      1,
+      "VAE"
+    ],
+    [
+      137,
+      9,
+      0,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      138,
+      11,
+      0,
+      5,
+      4,
+      "INT"
+    ],
+    [
+      139,
+      1,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      140,
+      1,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      142,
+      66,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      145,
+      80,
+      0,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      146,
+      17,
+      0,
+      66,
+      4,
+      "IMAGE"
+    ],
+    [
+      164,
+      1,
+      0,
+      66,
+      0,
+      "MODEL"
+    ],
+    [
+      165,
+      1,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      166,
+      3,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      167,
+      4,
+      0,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      168,
+      1,
+      2,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      169,
+      1,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      170,
+      1,
+      0,
+      66,
+      0,
+      "MODEL"
+    ],
+    [
+      171,
+      1,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      172,
+      3,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      173,
+      4,
+      0,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      174,
+      1,
+      2,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      175,
+      1,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      176,
+      4,
+      0,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      177,
+      3,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      178,
+      21,
+      0,
+      93,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "PuLID",
+      "bounding": [
+        1329,
+        -834,
+        818,
+        781
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        1163,
+        -29,
+        2137,
+        523
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1918176537727339,
+      "offset": [
+        -2361.4378160357655,
+        4.914833926949205
+      ]
+    }
+  },
+  "version": 0.4
+}
